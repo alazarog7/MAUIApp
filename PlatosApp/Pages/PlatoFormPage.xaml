@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PlatosApp.Pages.PlatoFormPage"
+             Title="PlatoFormPage">
+    <ContentPage.Resources>
+        <Style TargetType="Button">
+            <Setter Property="BackgroundColor" Value="Tomato"/>
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Margin" Value="0,5,0,5"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="*,Auto" ColumnDefinitions="*,*,*" ColumnSpacing="5">
+        <TableView Intent="Data" Grid.Row="0" Grid.ColumnSpan="3" >
+            <TableRoot>
+                <TableSection>
+                    <EntryCell Text="{Binding Path=Plato.Nombre}" Placeholder="Nombre"/>
+                    <EntryCell Keyboard="Numeric" Text="{Binding Path=Plato.Precio}" Placeholder="Precio"/>
+                    <EntryCell Text="{Binding Path=Plato.Ingredientes}" Placeholder="Ingredientes"/>
+                </TableSection>
+            </TableRoot>
+        </TableView>
+
+
+        <Button Text="Guardar" Clicked="OnSave" Grid.Row="1" Grid.Column="0" Margin="20,5"/>
+        <Button Text="Eliminar" Clicked="OnDelete" Grid.Row="1" Grid.Column="1" Margin="0,5"/>
+        <Button Text="Cancelar" Clicked="OnCancel" Grid.Row="1" Grid.Column="2" Margin="20,5"/>
+    </Grid>
+</ContentPage>

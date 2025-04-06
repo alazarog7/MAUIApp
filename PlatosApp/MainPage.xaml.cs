@@ -1,24 +1,44 @@
-﻿namespace PlatosApp
+﻿using PlatosApp.Helpers;
+using PlatosApp.Models;
+using PlatosApp.Pages;
+using System.Diagnostics;
+
+namespace PlatosApp
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
+        private readonly IRestClient _restClient;
 
-        public MainPage()
+        public MainPage(){}
+
+        public MainPage(IRestClient restClient)
         {
             InitializeComponent();
+            _restClient = restClient;
         }
 
-        private void OnCounterClicked(object sender, EventArgs e)
+        protected async override void OnAppearing()
         {
-            count++;
+            base.OnAppearing();
+            platosCollection.ItemsSource = await _restClient.GetPlatos();
+        }
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
+        async void OnAddPlatoAsync(object sender, EventArgs e)
+        {
+            var parameters = new Dictionary<string, object>
+            {
+                { nameof(Plato), new Plato()}
+            };
 
-            SemanticScreenReader.Announce(CounterBtn.Text);
+            await Shell.Current.GoToAsync(nameof(PlatoFormPage), parameters);
+        }
+
+        async void OnChangePlato(object sender, SelectionChangedEventArgs e)
+        {
+            var param = new Dictionary<string, object>() {
+                { nameof(Plato), e.CurrentSelection.FirstOrDefault() as Plato}
+            };
+            await Shell.Current.GoToAsync(nameof(PlatoFormPage), param);
         }
     }
 

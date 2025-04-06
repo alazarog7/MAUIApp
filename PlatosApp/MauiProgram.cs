@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
+using PlatosApp.Helpers;
+using PlatosApp.Pages;
 
 namespace PlatosApp
 {
@@ -15,9 +17,10 @@ namespace PlatosApp
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
-#if DEBUG
-    		builder.Logging.AddDebug();
-#endif
+            builder.Services.AddHttpClient<IRestClient, RestClient>();
+
+            builder.Services.AddSingleton<MainPage>();
+            builder.Services.AddSingleton<PlatoFormPage>();
 
             return builder.Build();
         }
