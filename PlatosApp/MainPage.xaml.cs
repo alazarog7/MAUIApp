@@ -1,7 +1,6 @@
 ﻿using PlatosApp.Helpers;
 using PlatosApp.Models;
 using PlatosApp.Pages;
-using System.Diagnostics;
 
 namespace PlatosApp
 {

@@ -18,7 +18,7 @@ namespace PlatosApp
                 });
 
             builder.Services.AddHttpClient<IRestClient, RestClient>();
-
+            builder.Services.Decorate<IRestClient, RestClientDecorator>();
             builder.Services.AddSingleton<MainPage>();
             builder.Services.AddSingleton<PlatoFormPage>();
 
